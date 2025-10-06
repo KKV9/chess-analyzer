@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess Analyzer - Validation Tool</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { padding: 10px 15px; font-size: 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 15px; margin-top: 20px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h1>♟️ Chess Analyzer - CSV Validator</h1>
+  <p>Click below to validate your <code>data/data.csv</code> file:</p>
+  <button id="runBtn">Run Validation</button>
+  <pre id="output">Awaiting validation...</pre>
+
+  <script>
+    document.getElementById("runBtn").addEventListener("click", async () => {
+      const output = document.getElementById("output");
+      output.textContent = "Running validation...";
+      try {
+        const response = await fetch("/run-validation");
+        const text = await response.text();
+        output.innerHTML = text;
+      } catch (err) {
+        output.textContent = "Error running validation.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

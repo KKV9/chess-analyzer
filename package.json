@@ -1,0 +1,24 @@
+{
+  "name": "chess_project",
+  "version": "1.0.0",
+  "description": "An intelligent web-based application that analyzes thousands of chess games to extract insights, visualize trends, and assist players in improving their strategic understanding. Developed as part of the **COMP7039 – Agile Processes** module (Autumn 2025).",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KKV9/chess-analyzer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KKV9/chess-analyzer/issues"
+  },
+  "homepage": "https://github.com/KKV9/chess-analyzer#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
