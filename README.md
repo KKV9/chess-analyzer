@@ -38,11 +38,11 @@ The system imports, processes, and visualizes large datasets of chess games, pro
 ### **Technology Stack**
 | Layer | Technologies |
 |-------|---------------|
-| **Frontend** | HTML / CSS / JavaScript |
+| **Frontend** | HTML / CSS with Bootstrap and Javascript |
 | **Backend** | Node.js / Express |
 | **Python Integration** | `validate.py` (CSV validator) |
-| **Database (future)** | PostgreSQL |
-| **DevOps** | GitHub + Render (for deployment) |
+| **DevOps** | GitHub CI/Actions Workflows (for deployment) |
+| **Hosting** | AWS EC2 with Nginx reverse proxy and Cloudflare for DNS and CDN |
 
 ##  Knowledge Extraction Examples
 
