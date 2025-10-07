@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Validator - Chess Analyzer</title>
+  <link rel="icon" href="./images/favicon_white.png" type="image/png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">
+        <img src="./images/favicon_white.png" alt="Chess Analyzer Logo">
+      </a>
+    </div>
+  </nav>
+
+    <!-- Validator Card -->
+    <div class="card shadow-sm mb-4">
+    <div class="card-body">
+    <h5 class="card-title mb-3 d-flex align-items-center">
+        CSV Validator
+        <span 
+                class="ms-2" 
+                data-bs-toggle="tooltip" 
+                data-bs-placement="right" 
+                title="This Validator box allows you to run the CSV validation script which checks the data/data.csv file on the server containing thousands of chess games. The results will show in the output box below.">
+                <i class="bi bi-question-circle-fill"></i>
+            </span>
+    </h5>
+  
+      <p class="mb-3">Click below to validate your <code>data/data.csv</code> file:</p>
+      <button id="runBtn" class="btn btn-outline-light btn-lg">Run Validation</button>
+    </div>
+  </div>
+
+    <!-- Output Card -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Output
+            <span 
+                class="ms-2" 
+                data-bs-toggle="tooltip" 
+                data-bs-placement="right" 
+                title="This output box shows the results of the CSV validation script. The script checks if your CSV file exists, reads the header and first data row, and reports any issues.">
+                <i class="bi bi-question-circle-fill"></i>
+            </span>
+        </h5>
+        <pre id="output">Awaiting validation...</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- External Validator JS -->
+  <script src="validator.js"></script>
+
+  <!-- Enable Bootstrap tooltips -->
+  <script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+  </script>
+</body>
+</html>
