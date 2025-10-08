@@ -1,88 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chess Analyzer</title>
-        <link
-        rel="icon" href="./images/favicon_white.png" type="image/png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Analyzer</title>
+    <link rel="icon" href="./images/favicon_white.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Full Screen Hero Section -->
+    <section class="hero-fullscreen" id="heroSection">
+        <!-- Animated Chess Background -->
+        <div class="chess-background">
+            <div class="chess-game chess-game-1"></div>
+            <div class="chess-game chess-game-2"></div>
+            <div class="chess-game chess-game-3"></div>
+        </div>
+        
+        <div class="container hero-content">
+            <img src="./images/logo.png" alt="Chess Analyzer Logo" class="hero-logo">
+            <h1>Master Your Chess Game</h1>
+            <p>Analyze, validate, and elevate your chess strategy with our powerful suite of AI-driven tools</p>
+            <button class="btn-get-started" id="getStartedBtn">
+                Get Started
+                <i class="bi bi-arrow-down"></i>
+            </button>
+        </div>
+    </section>
 
-        <!-- Bootstrap CSS -->
-        <link
-        rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-
-        <!-- Custom stylesheet -->
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="./images/favicon_white.png" alt="Chess Analyzer Logo">
-                </a>
-            </div>
-        </nav>
-
-        <div
-            class="container">
-            <!-- Hero Section -->
-            <div class="hero">
-                <img src="./images/logo.png" alt="Chess Analyzer Logo">
-                <p>Analyze, validate, and improve your chess games with our suite of tools.</p>
-            </div>
-
-            <div
-                class="row g-4">
+    <!-- Tools Section -->
+    <section id="tools" class="tools-section">
+        <div class="container">
+            <div class="cards-grid">
                 <!-- Validator App -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">CSV Database Validator</h5>
-                            <p class="card-text">Check your CSV files for errors and inconsistencies. Make sure your chess data is clean and ready for analysis.</p>
-                            <a href="/validator.html" class="btn btn-outline-light">Go to Validator</a>
-                        </div>
+                <div class="app-card">
+                    <span class="status-badge active">Available</span>
+                    <div class="card-icon">
+                        <i class="bi bi-check-circle-fill"></i>
                     </div>
+                    <h3>CSV Database Validator</h3>
+                    <p>Ensure data integrity with our advanced validation tool. Detect errors and inconsistencies in your chess database instantly.</p>
+                    <a href="/validator.html" class="btn-modern">
+                        Launch Validator
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
                 </div>
 
-                <!-- Chess Strategic Profile Analysis App -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Chess Strategic Profile Analysis</h5>
-                            <p class="card-text">Analyze your games and get a strategic profile to improve your chess play. Coming soon!</p>
-                            <button class="btn btn-outline-light" disabled>Coming Soon</button>
-                        </div>
+                <!-- Strategic Profile -->
+                <div class="app-card">
+                    <span class="status-badge">Coming Soon</span>
+                    <div class="card-icon">
+                        <i class="bi bi-graph-up"></i>
                     </div>
+                    <h3>Strategic Profile Analysis</h3>
+                    <p>Get deep insights into your playing style. Discover strengths, weaknesses, and personalized improvement strategies.</p>
+                    <button class="btn-modern" disabled>
+                        Coming Soon
+                        <i class="bi bi-lock-fill"></i>
+                    </button>
                 </div>
 
-                <!-- Opening Analyzer App -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Opening Analyzer</h5>
-                            <p class="card-text">Predict the likelihood of winning based on your opening moves. Coming soon!</p>
-                            <button class="btn btn-outline-light" disabled>Coming Soon</button>
-                        </div>
+                <!-- Opening Analyzer -->
+                <div class="app-card">
+                    <span class="status-badge">Coming Soon</span>
+                    <div class="card-icon">
+                        <i class="bi bi-lightbulb-fill"></i>
                     </div>
+                    <h3>Opening Analyzer</h3>
+                    <p>Predict game outcomes based on opening moves. Leverage historical data to optimize your opening repertoire.</p>
+                    <button class="btn-modern" disabled>
+                        Coming Soon
+                        <i class="bi bi-lock-fill"></i>
+                    </button>
                 </div>
 
-                <!-- Blunder Analyzer App -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Blunder Analyzer</h5>
-                            <p class="card-text">Detect common blunders in your games and analyze their frequencies. Coming soon!</p>
-                            <button class="btn btn-outline-light" disabled>Coming Soon</button>
-                        </div>
+                <!-- Blunder Analyzer -->
+                <div class="app-card">
+                    <span class="status-badge">Coming Soon</span>
+                    <div class="card-icon">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
                     </div>
+                    <h3>Blunder Analyzer</h3>
+                    <p>Identify and learn from your mistakes. Track common blunders and receive targeted training recommendations.</p>
+                    <button class="btn-modern" disabled>
+                        Coming Soon
+                        <i class="bi bi-lock-fill"></i>
+                    </button>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <p>© 2025 Chess Analyzer. Elevating chess performance through data.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+</body>
 </html>
-
