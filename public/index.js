@@ -70,14 +70,12 @@ const gameMoves = [
     {
         from: 'e2',
         to: 'e4',
-        piece: '♟',
-        type: 'great'
+        piece: '♟'
     },
     {
         from: 'e7',
         to: 'e5',
-        piece: '♙',
-        type: 'brilliant'
+        piece: '♙'
     },
     {
         from: 'g1',
@@ -115,8 +113,7 @@ const gameMoves = [
     }, {
         from: 'f1',
         to: 'c4',
-        piece: '♝',
-        type: 'great'
+        piece: '♝'
     }, {
         from: 'g8',
         to: 'f6',
