@@ -1,31 +1,50 @@
-// Morphy's Opera Game - Single focused game
+// Starting chess position
 const gamePosition = {
-    'a8': '♜', 'b8': '♞', 'c8': '♝', 'd8': '♛', 'e8': '♚', 'f8': '♝', 'g8': '♞', 'h8': '♜',
-    'a7': '♟', 'b7': '♟', 'c7': '♟', 'd7': '♟', 'e7': '♟', 'f7': '♟', 'g7': '♟', 'h7': '♟',
+    'a8': '♖', 'b8': '♘', 'c8': '♗', 'd8': '♕', 'e8': '♔', 'f8': '♗', 'g8': '♘', 'h8': '♖',
+    'a7': '♙', 'b7': '♙', 'c7': '♙', 'd7': '♙', 'e7': '♙', 'f7': '♙', 'g7': '♙', 'h7': '♙',
     'a6': '', 'b6': '', 'c6': '', 'd6': '', 'e6': '', 'f6': '', 'g6': '', 'h6': '',
     'a5': '', 'b5': '', 'c5': '', 'd5': '', 'e5': '', 'f5': '', 'g5': '', 'h5': '',
     'a4': '', 'b4': '', 'c4': '', 'd4': '', 'e4': '', 'f4': '', 'g4': '', 'h4': '',
     'a3': '', 'b3': '', 'c3': '', 'd3': '', 'e3': '', 'f3': '', 'g3': '', 'h3': '',
-    'a2': '♙', 'b2': '♙', 'c2': '♙', 'd2': '♙', 'e2': '♙', 'f2': '♙', 'g2': '♙', 'h2': '♙',
-    'a1': '♖', 'b1': '♘', 'c1': '♗', 'd1': '♕', 'e1': '♔', 'f1': '♗', 'g1': '♘', 'h1': '♖'
+    'a2': '♟', 'b2': '♟', 'c2': '♟', 'd2': '♟', 'e2': '♟', 'f2': '♟', 'g2': '♟', 'h2': '♟',
+    'a1': '♜', 'b1': '♞', 'c1': '♝', 'd1': '♛', 'e1': '♚', 'f1': '♝', 'g1': '♞', 'h1': '♜'
 };
 
 const gameMoves = [
-    { from: 'e2', to: 'e4', piece: '♙' },
-    { from: 'e7', to: 'e5', piece: '♟' },
-    { from: 'g1', to: 'f3', piece: '♘' },
-    { from: 'b8', to: 'c6', piece: '♞' },
-    { from: 'f1', to: 'c4', piece: '♗' },
-    { from: 'g8', to: 'f6', piece: '♞' },
-    { from: 'd2', to: 'd3', piece: '♙' },
-    { from: 'f8', to: 'c5', piece: '♝' },
-    { from: 'c2', to: 'c3', piece: '♙' },
-    { from: 'd7', to: 'd6', piece: '♟' },
-    { from: 'c4', to: 'f7', piece: '♗' },
-    { from: 'e8', to: 'f7', piece: '♚' },
-    { from: 'd1', to: 'b3', piece: '♕' },
-    { from: 'f7', to: 'f8', piece: '♚' },
-    { from: 'b3', to: 'f7', piece: '♕' } // checkmate
+    { from: 'e2', to: 'e4', piece: '♟' },
+    { from: 'e7', to: 'e5', piece: '♙' },
+    { from: 'g1', to: 'f3', piece: '♞' },
+    { from: 'd7', to: 'd6', piece: '♙' },
+    { from: 'd2', to: 'd4', piece: '♟' },
+    { from: 'c8', to: 'g4', piece: '♗' },
+    { from: 'd4', to: 'e5', piece: '♟' },
+    { from: 'g4', to: 'f3', piece: '♗' },
+    { from: 'd1', to: 'f3', piece: '♛' },
+    { from: 'd6', to: 'e5', piece: '♙' },
+    { from: 'f1', to: 'c4', piece: '♝' },
+    { from: 'g8', to: 'f6', piece: '♘' },
+    { from: 'f3', to: 'b3', piece: '♛' },
+    { from: 'd8', to: 'e7', piece: '♕' },
+    { from: 'b1', to: 'c3', piece: '♞' },
+    { from: 'c7', to: 'c6', piece: '♙' },
+    { from: 'c1', to: 'g5', piece: '♝' },
+    { from: 'b7', to: 'b5', piece: '♙' },
+    { from: 'c3', to: 'b5', piece: '♞' },
+    { from: 'c6', to: 'b5', piece: '♙' },
+    { from: 'c4', to: 'b5', piece: '♝', check: 'e8' },
+    { from: 'b8', to: 'd7', piece: '♘' },
+    { from: 'e1', to: 'c1', piece: '♚' },
+    { from: 'a1', to: 'd1', piece: '♜' },
+    { from: 'a8', to: 'd8', piece: '♖' },
+    { from: 'd1', to: 'd7', piece: '♜' },
+    { from: 'd8', to: 'd7', piece: '♖' },
+    { from: 'h1', to: 'd1', piece: '♜' },
+    { from: 'e7', to: 'e6', piece: '♕' },
+    { from: 'b5', to: 'd7', piece: '♝', check: 'e8' },
+    { from: 'f6', to: 'd7', piece: '♘' },
+    { from: 'b3', to: 'b8', piece: '♛', type: 'brilliant', check: 'e8' },
+    { from: 'd7', to: 'b8', piece: '♘' },
+    { from: 'd1', to: 'd8', piece: '♜', check: 'e8' }
 ];
 
 function createChessBoard(position) {
