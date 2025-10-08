@@ -1,109 +1,110 @@
-< !DOCTYPE html > <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CSV Validator - Chess Analyzer</title>
-        <link rel="icon" href="./images/favicon_white.png" type="image/png">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/styles.css">
-    </head>
-    <body>
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="container">
-                <a href="/#tools" class="back-btn">
-                    <i class="bi bi-arrow-left"></i>
-                    Back to Toolbox
-                </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Validator - Chess Analyzer</title>
+    <link rel="icon" href="./images/favicon_white.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <a href="/#tools" class="back-btn">
+                <i class="bi bi-arrow-left"></i>
+                Back to Toolbox
+            </a>
 
-                <!-- Page Header -->
-                <div class="page-header">
-                    <h1>CSV Database Validator</h1>
-                    <p>Validate the integrity of your chess game database</p>
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>CSV Database Validator</h1>
+                <p>Validate the integrity of your chess game database</p>
+            </div>
+
+            <!-- Validator Card -->
+            <div class="validator-card">
+                <div class="card-title-wrapper">
+                    <h2>Validation Control</h2>
+                    <i class="bi bi-info-circle info-icon" 
+                       data-bs-toggle="tooltip" 
+                       data-bs-placement="right" 
+                       title="This validator checks the data/data.csv file on the server containing thousands of chess games. Click 'Run Validation' to verify data integrity."></i>
                 </div>
+                
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                    Click the button below to validate your <code>data/data.csv</code> file:
+                </p>
 
-                <!-- Validator Card -->
-                <div class="validator-card">
-                    <div class="card-title-wrapper">
-                        <h2>Validation Control</h2>
-                        <i class="bi bi-info-circle info-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="This validator checks the data/data.csv file on the server containing thousands of chess games. Click 'Run Validation' to verify data integrity."></i>
-                    </div>
+                <button id="runBtn" class="run-btn">
+                    <i class="bi bi-play-circle-fill" style="margin-right: 0.5rem;"></i>
+                    Run Validation
+                </button>
+            </div>
 
-                    <p style="color: var(--text-muted); margin-bottom: 2rem;">
-                        Click the button below to validate your
-                        <code>data/data.csv</code>
-                        file:
-                    </p>
-
-                    <button id="runBtn" class="run-btn">
-                        <i class="bi bi-play-circle-fill" style="margin-right: 0.5rem;"></i>
-                        Run Validation
-                    </button>
+            <!-- Output Card -->
+            <div class="output-card">
+                <div class="card-title-wrapper">
+                    <h2>Output</h2>
+                    <i class="bi bi-info-circle info-icon" 
+                       data-bs-toggle="tooltip" 
+                       data-bs-placement="right" 
+                       title="This output shows the results of the CSV validation script. The script checks if your CSV file exists, reads the header and first data row, and reports any issues."></i>
                 </div>
-
-                <!-- Output Card -->
-                <div class="output-card">
-                    <div class="card-title-wrapper">
-                        <h2>Output</h2>
-                        <i class="bi bi-info-circle info-icon" data-bs-toggle="tooltip" data-bs-placement="right" title="This output shows the results of the CSV validation script. The script checks if your CSV file exists, reads the header and first data row, and reports any issues."></i>
-                    </div>
-
-                    <pre id="output" class="output-pre"><span class="status-indicator waiting"></span>Awaiting validation...</pre>
-                </div>
+                
+                <pre id="output" class="output-pre"><span class="status-indicator waiting"></span>Awaiting validation...</pre>
             </div>
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/validator.js"></script>
-        <script>
-            // Enable Bootstrap tooltips
-            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-            const tooltipList = [... tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/validator.js"></script>
+    <script>
+        // Enable Bootstrap tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
 
-            // Enhanced button interaction
-            const runBtn = document.getElementById('runBtn');
-            const output = document.getElementById('output');
+        // Enhanced button interaction
+        const runBtn = document.getElementById('runBtn');
+        const output = document.getElementById('output');
 
-            // Add loading state when button is clicked
-            runBtn.addEventListener('click', function () {
-                this.classList.add('loading');
-                output.classList.add('has-content');
+        // Add loading state when button is clicked
+        runBtn.addEventListener('click', function() {
+            this.classList.add('loading');
+            output.classList.add('has-content');
+            
+            // Remove loading state after validation completes (adjust timing as needed)
+            setTimeout(() => {
+                this.classList.remove('loading');
+            }, 1000);
+        });
 
-                // Remove loading state after validation completes (adjust timing as needed)
-                setTimeout(() => {
-                    this.classList.remove('loading');
-                }, 1000);
-            });
-
-            // Monitor output changes to update status indicator
-            const observer = new MutationObserver((mutations) => {
-                const text = output.textContent.toLowerCase();
-                const indicator = output.querySelector('.status-indicator');
-
-                if (indicator) {
-                    indicator.className = 'status-indicator';
-
-                    if (text.includes('error') || text.includes('failed')) {
-                        indicator.classList.add('error');
-                    } else if (text.includes('success') || text.includes('valid')) {
-                        indicator.classList.add('success');
-                    } else if (text.includes('processing') || text.includes('running')) {
-                        indicator.classList.add('processing');
-                    } else {
-                        indicator.classList.add('waiting');
-                    }
+        // Monitor output changes to update status indicator
+        const observer = new MutationObserver((mutations) => {
+            const text = output.textContent.toLowerCase();
+            const indicator = output.querySelector('.status-indicator');
+            
+            if (indicator) {
+                indicator.className = 'status-indicator';
+                
+                if (text.includes('error') || text.includes('failed')) {
+                    indicator.classList.add('error');
+                } else if (text.includes('success') || text.includes('valid')) {
+                    indicator.classList.add('success');
+                } else if (text.includes('processing') || text.includes('running')) {
+                    indicator.classList.add('processing');
+                } else {
+                    indicator.classList.add('waiting');
                 }
-            });
+            }
+        });
 
-            observer.observe(output, {
-                childList: true,
-                subtree: true,
-                characterData: true
-            });
-        </script>
-    </body>
+        observer.observe(output, { childList: true, subtree: true, characterData: true });
+    </script>
+</body>
 </html>

@@ -321,6 +321,7 @@ function showCaptureEffect(square, capturedPiece) {
     el.appendChild(fx);
     setTimeout(() => fx.remove(), 800);
 }
+
 function showSpecialMoveEffect(square, type) {
     const el = document.querySelector(`[data-square="${square}"]`);
     if (! el) 
@@ -345,7 +346,6 @@ function showSpecialMoveEffect(square, type) {
     el.appendChild(fx);
     setTimeout(() => fx.remove(), 2000);
 }
-
 
 function triggerConfetti() {
     const container = document.querySelector('.chess-container');
@@ -543,6 +543,85 @@ document.addEventListener('DOMContentLoaded', () => {
         board.innerHTML = createChessBoard(initialPosition);
         animateGame(board, initialPosition, gameMoves);
     }
+
+    // Get Started button functionality
+    const getStartedBtn = document.getElementById('getStartedBtn');
+    const toolsSection = document.getElementById('tools');
+
+    if (getStartedBtn && toolsSection) {
+        getStartedBtn.addEventListener('click', () => {
+            toolsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.app-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('slide-in');
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    }
+
+    // Handle direct navigation to #tools
+    if (window.location.hash === '#tools' && toolsSection) {
+        toolsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        setTimeout(() => {
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('slide-in');
+                }, index * 100);
+            });
+        }, 500);
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // If scrolling to tools, animate cards
+                if (href === '#tools') {
+                    setTimeout(() => {
+                        const cards = document.querySelectorAll('.app-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('slide-in');
+                            }, index * 100);
+                        });
+                    }, 500);
+                }
+            }
+        });
+    });
+
+    // Add some interactive effects
+    const heroSection = document.getElementById('heroSection');
+    if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const chessBoard = document.querySelector('.chess-board');
+            if (chessBoard) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 10;
+                const y = (e.clientY / window.innerHeight - 0.5) * 10;
+                chessBoard.style.transform = `rotate3d(${y}, ${x}, 0, 5deg)`;
+            }
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+            const chessBoard = document.querySelector('.chess-board');
+            if (chessBoard) {
+                chessBoard.style.transform = 'rotate3d(0, 0, 0, 0deg)';
+            }
+        });
+    }
 });
 
 window.addEventListener('resize', () => {
@@ -552,4 +631,3 @@ window.addEventListener('resize', () => {
         board.style.height = 'min(90vw, 350px)';
     }
 });
-
