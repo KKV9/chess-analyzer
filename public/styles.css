@@ -2,7 +2,7 @@
    GLOBAL STYLES
    =================================== */
 
-* {
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -142,111 +142,48 @@ body::before {
     overflow: hidden;
 }
 
-.chess-background {
+.chess-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 0;
     opacity: 0.4;
     pointer-events: none;
 }
 
-.chess-game {
-    position: absolute;
+.chess-board {
     display: grid;
-    grid-template-columns: repeat(8, 50px);
-    grid-template-rows: repeat(8, 50px);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     gap: 1px;
-    transform: rotate(-10deg);
-    transition: opacity 0.3s ease;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
-}
-
-.chess-game-1 {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
-    animation: none;
-    opacity: 0.6;
-}
-
-.chess-game-2 {
-    top: 50%;
-    right: 5%;
-    animation: float 25s ease-in-out infinite reverse;
-}
-
-.chess-game-3 {
-    bottom: 10%;
-    left: 15%;
-    animation: float 30s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: rotate(-15deg) translateY(0px);
-    }
-    50% {
-        transform: rotate(-15deg) translateY(-30px);
-    }
-}
-
-.chess-square {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
+    border: 3px solid rgba(0, 255, 136, 0.4);
+    border-radius: 8px;
+    box-shadow: 
+        0 0 60px rgba(0, 255, 136, 0.3),
+        inset 0 0 40px rgba(0, 255, 136, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    
+    /* Responsive sizing */
+    width: min(85vw, 500px, 85vh);
+    height: min(85vw, 500px, 85vh);
+    
+    /* Smooth scaling */
     transition: all 0.3s ease;
 }
 
-
-
-/* ===================================
-   CHESS MOVE HIGHLIGHTS
-   =================================== */
-
-/* White move highlight */
-.chess-square.white-move {
-  background: rgba(0, 255, 136, 0.5) !important;
-  border: 2px solid var(--primary);
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-/* Black move highlight */
-.chess-square.black-move {
-  background: rgba(0, 102, 255, 0.5) !important;
-  border: 2px solid var(--secondary);
-  box-shadow: 0 0 15px rgba(0, 102, 255, 0.7);
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-/* Animation for move highlights */
-@keyframes highlight-white {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-@keyframes highlight-black {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.chess-square.white-move {
-  animation: highlight-white 0.5s ease;
-}
-
-.chess-square.black-move {
-  animation: highlight-black 0.5s ease;
+.chess-square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(18px, 4vw, 28px);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .light-square {
@@ -257,9 +194,31 @@ body::before {
     background: rgba(41, 50, 46, 0.519);
 }
 
+/* ===================================
+   CHESS MOVE HIGHLIGHTS
+   =================================== */
+
+/* White move highlight */
+.chess-square.white-move {
+    background: rgba(0, 255, 136, 0.6) !important;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+    z-index: 2;
+    transform: scale(1.05);
+}
+
+/* Black move highlight */
+.chess-square.black-move {
+    background: rgba(0, 102, 255, 0.6) !important;
+    border: 2px solid #0066ff;
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.8);
+    z-index: 2;
+    transform: scale(1.05);
+}
+
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero-fullscreen .container {
@@ -998,13 +957,18 @@ footer {
         font-size: 1rem;
     }
 
-    .chess-game {
-        grid-template-columns: repeat(8, 20px);
-        grid-template-rows: repeat(8, 20px);
+    .chess-board {
+        width: min(90vw, 350px);
+        height: min(90vw, 350px);
+        border-width: 2px;
     }
 
-    .chess-background {
-        opacity: 0.08;
+    .chess-square {
+        font-size: clamp(16px, 4vw, 22px);
+    }
+
+    .chess-container {
+        opacity: 0.3;
     }
 
     .cards-grid {
@@ -1031,5 +995,24 @@ footer {
 
     .card {
         margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chess-board {
+        width: min(85vw, 280px);
+        height: min(85vw, 280px);
+    }
+    
+    .chess-square {
+        font-size: clamp(14px, 3.5vw, 18px);
+    }
+    
+    .hero-logo {
+        height: 120px;
+    }
+    
+    .hero-fullscreen h1 {
+        font-size: 2rem;
     }
 }
