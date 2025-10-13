@@ -25,4 +25,27 @@ app.get("/run-validation", (req, res) => {
     });
 });
 
+// Endpoint to run Python black-white winrate script
+app.get("/run-black-white", (req, res) => {
+    const scriptPath = path.join(__dirname, "scripts/wins.py");
+
+    exec(`python "${scriptPath}"`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing script: ${error.message}`);
+            return res.status(500).json({ error: error.message });
+        }
+        if (stderr) {
+            console.error(`Script stderr: ${stderr}`);
+        }
+        
+        // Parse JSON output from Python script
+        try {
+            const result = JSON.parse(stdout);
+            res.json(result);
+        } catch (parseError) {
+            res.status(500).json({ error: "Failed to parse script output" });
+        }
+    });
+});
+
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));

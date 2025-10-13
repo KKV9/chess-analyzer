@@ -759,7 +759,6 @@ body::before {
     height: 100%;
     background: linear-gradient(180deg, var(--primary), var(--secondary));
 }
-
 .card-title-wrapper {
     display: flex;
     align-items: center;
