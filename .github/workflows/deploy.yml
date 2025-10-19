@@ -21,10 +21,8 @@ jobs:
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
-        env:
-          GENAI_KEY: ${{ secrets.GENAI_KEY }}
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'ENDSSH'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
             set -e
 
             cd /var/www/chess-analyzer || exit 1
@@ -43,9 +41,14 @@ jobs:
             pip install -r scripts/requirements.txt
             deactivate
 
-            echo "GENAI_KEY=${GENAI_KEY}" > .env
-            echo "PORT=3000" >> .env
+            # Create .env file with the API key
+            cat > .env << 'ENVFILE'
+          GENAI_KEY=${{ secrets.GENAI_KEY }}
+          PORT=3000
+          NODE_ENV=production
+          ENVFILE
 
+            # Create PM2 ecosystem file
             cat > ecosystem.config.js << 'ECOFILE'
           module.exports = {
             apps: [{
@@ -68,4 +71,4 @@ jobs:
             pm2 save
 
             echo "Deployment completed successfully!"
-          ENDSSH
+          EOF
