@@ -21,11 +21,19 @@ jobs:
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
+        env:
+          GENAI_KEY: ${{ secrets.GENAI_KEY }}
         run: |
           ssh -i ~/.ssh/id_ed25519 ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd /var/www/chess-analyzer || exit 1
             git fetch origin master
             git reset --hard origin/master
             npm install --omit=dev
+
+            # Store GENAI_KEY in the EC2 environment for runtime
+            echo "export GENAI_KEY='${GENAI_KEY}'" >> ~/.bashrc
+            source ~/.bashrc
+
+            # Reload PM2 app (Node or Python-based) with new environment
             pm2 reload chess-analyzer --update-env
           EOF
