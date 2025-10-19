@@ -38,11 +38,12 @@ The system imports, processes, and visualizes large datasets of chess games, pro
 ### **Technology Stack**
 | Layer | Technologies |
 |-------|---------------|
-| **Frontend** | HTML / CSS with Bootstrap and Javascript |
-| **Backend** | Node.js / Express |
-| **Python Integration** | `validate.py` (CSV validator), `wins.py` (winrate calculator), `strat.py` (Strategic analysis) |
-| **DevOps** | GitHub CI/Actions Workflows (for deployment) |
-| **Hosting** | AWS EC2 with Nginx reverse proxy and Cloudflare for DNS |
+| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js |
+| **Backend** | Node.js, Express |
+| **AI/ML** | Google Generative AI (Gemini), Python data processing |
+| **Python Scripts** | `validate.py`, `wins.py`, `strat.py` |
+| **DevOps** | GitHub Actions, PM2, Nginx |
+| **Hosting** | AWS EC2, Cloudflare DNS |
 
 ##  Knowledge Extraction Examples
 
@@ -85,20 +86,43 @@ The system imports, processes, and visualizes large datasets of chess games, pro
 
 ##  Installation & Usage
 
+### Prerequisites
+- **Node.js** (v14 or higher)
+- **Python** (v3.8 or higher)
+- **npm** (v6 or higher)
+
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/chess-analyzer.git
+git clone https://github.com/KKV9/chess-analyzer.git
 cd chess-analyzer
 ```
 
-### 2. Install Node.js Dependencies
+### 2. Setup Node.js
 ```bash
+# Install dependencies
 npm install
+
+# Create environment file
+cp .env.example .env
+
+# Edit .env with your API key
+# GENAI_KEY=your_google_genai_api_key_here
 ```
 
-### 3. Install Python Dependencies
+### 3. Install Python Virtual Environment
 ```bash
-pip install python-dotenv
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+# On Linux/Mac:
+source venv/bin/activate
+# On Windows:
+# venv\Scripts\activate
+
+# Install Python dependencies
+pip install --upgrade pip
+pip install -r scripts/requirements.txt
 ```
 
 ### 4. Run the Web Server
@@ -110,6 +134,34 @@ node server.js
 ```bash
 http://localhost:3000
 ```
+## Configuration
+### Environment Variables
+Create a .env file in the root directory:
+```env
+# Server Configuration
+PORT=3000
+
+# Google Generative AI API Key
+GENAI_KEY=your_google_genai_api_key_here
+
+# Node Environment
+NODE_ENV=development
+```
+
+### Google API Key
+1. Visit [Google AI Studio](https://aistudio.google.com/) 
+
+1. Create a new API key
+
+1. Add it to your .env file
+
+##  License
+
+- This project is for educational purposes.
+- Not intended for commercial use.
+
+
+
 
 ##  License
 
