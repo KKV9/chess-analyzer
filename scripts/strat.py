@@ -6,6 +6,7 @@ A script to find a player's games in a dataset,
 this data is fed to Google's generative AI through the API which provides an analysis.
 """
 
+import os
 import csv
 import sys
 import google.generativeai as genai

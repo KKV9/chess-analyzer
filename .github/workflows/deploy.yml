@@ -24,16 +24,58 @@ jobs:
         env:
           GENAI_KEY: ${{ secrets.GENAI_KEY }}
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
+            set -e  # Exit on any error
+
+            # Navigate to project directory
             cd /var/www/chess-analyzer || exit 1
+
+            # Pull latest code
             git fetch origin master
             git reset --hard origin/master
+
+            # Install Node.js dependencies
             npm install --omit=dev
 
-            # Store GENAI_KEY in the EC2 environment for runtime
-            echo "export GENAI_KEY='${GENAI_KEY}'" >> ~/.bashrc
-            source ~/.bashrc
+            # Setup Python virtual environment if it doesn't exist
+            if [ ! -d "venv" ]; then
+              python3 -m venv venv
+            fi
 
-            # Reload PM2 app (Node or Python-based) with new environment
-            pm2 reload chess-analyzer --update-env
+            # Activate virtual environment and install Python dependencies
+            source venv/bin/activate
+            pip install --upgrade pip
+            pip install -r scripts/requirements.txt
+            deactivate
+
+            # Create/update .env file with GENAI_KEY
+            echo "GENAI_KEY=${{ secrets.GENAI_KEY }}" > .env
+            echo "PORT=3000" >> .env
+
+            # Update PM2 ecosystem file with environment variables
+            cat > ecosystem.config.js << 'ECOEOF'
+module.exports = {
+  apps: [{
+    name: 'chess-analyzer',
+    script: './server.js',
+    instances: 1,
+    autorestart: true,
+    watch: false,
+    max_memory_restart: '1G',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 3000
+    },
+    env_file: '.env'
+  }]
+};
+ECOEOF
+
+            # Reload PM2 with new environment
+            pm2 reload ecosystem.config.js --update-env
+
+            # Save PM2 configuration
+            pm2 save
+
+            echo "Deployment completed successfully!"
           EOF
