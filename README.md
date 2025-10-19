@@ -1,8 +1,33 @@
 <div align="center">
   <img src="public/images/logo.png" alt="Chess Analyzer Logo" width="200" height="200">
   
-  *An intelligent web-based chess analysis platform*
+  <h2><b>Chess Analyzer</b></h2>
+
+  <p><i>An intelligent web-based chess analysis platform</i></p>
+
+  <p align="center">
+    <a href="https://chess-app.kkv9.ovh/">
+      <img src="https://img.shields.io/badge/demo-live%20app-%231C7ED6.svg?style=flat-square&logo=google-chrome&logoColor=white">
+    </a>
+    <a href="https://github.com/KKV9/chess-analyzer">
+      <img src="https://img.shields.io/github/last-commit/KKV9/chess-analyzer?style=flat-square&color=%23FFD43B&logo=git&logoColor=white">
+    </a>
+  </p>
+
+  <p align="center">
+    <a href="https://aistudio.google.com/">
+      <img src="https://img.shields.io/badge/AI-Google%20Gemini-%2300AEEF?style=flat-square&logo=googlecloud&logoColor=white">
+    </a>
+    <a href="https://www.chartjs.org/">
+      <img src="https://img.shields.io/badge/visuals-Chart.js-%23FF6384?style=flat-square&logo=chartdotjs&logoColor=white">
+    </a>
+    <a href="https://aws.amazon.com/">
+      <img src="https://img.shields.io/badge/devops-AWS%20%7C%20PM2%20%7C%20CI%2FCD-%23F0B429.svg?style=flat-square&logo=cloudflare&logoColor=white">
+    </a>
+  </p>
 </div>
+
+---
 
 An intelligent web-based application that analyzes thousands of chess games to extract insights, visualize trends, and assist players in improving their strategic understanding. Developed as part of the **COMP7039 – Agile Processes** module (Autumn 2025).
 
@@ -54,7 +79,7 @@ Backend → Frontend → User
 | **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js | User interface and data visualization |
 | **Backend** | Node.js, Express.js | Web server and API routing |
 | **AI/ML** | Google Generative AI (Gemini), Python | Strategic analysis and insights |
-| **Data Processing** | Python 3.8+, CSV module, pandas | Chess game analysis and statistics |
+| **Data Processing** | Python 3.8+, CSV module | Chess game analysis and statistics |
 | **DevOps** | GitHub Actions, PM2, Nginx | Continuous deployment and process management |
 | **Hosting** | AWS EC2, Cloudflare DNS | Production deployment and DNS management |
 
