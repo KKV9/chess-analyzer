@@ -95,8 +95,8 @@ app.get("/run-strategy", (req, res) => {
             return res.status(500).send(stderr);
         }
         
-        // Check if output indicates no games found
-        if (stdout.includes("No games found") || stdout.includes("Error:")) {
+        // Check if output indicates no games found (now exits with status 0)
+        if (stdout.includes("❌ Error: No games found") || stdout.includes("No games found")) {
             return res.status(404).send(stdout);
         }
         

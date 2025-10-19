@@ -43,45 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Display successful analysis
                 displayAnalysis(playerName, analysis);
             } else {
-                // Handle errors
-                if (analysis.includes("No games found")) {
-                    output.innerHTML = `<span class="status-indicator error"></span>❌ <strong>Player Not Found</strong>\n\nNo games found for "${playerName}" in the database.\n\n<strong>Suggestions:</strong>\n• Check the spelling\n• Try the full name or nickname\n• Player might not be in the database`;
-                } else {
-                    output.innerHTML = `<span class="status-indicator error"></span>❌ <strong>Error:</strong>\n\n${analysis}`;
-                }
+                // Handle errors - display the exact server response without overriding it
+                output.innerHTML = `<span class="status-indicator error"></span>${analysis}`;
             }
         } catch (err) {
             output.innerHTML = '<span class="status-indicator error"></span>❌ <strong>Connection Error</strong>\n\nFailed to connect to the analysis server.\n\nPlease check your connection and try again.';
             console.error("Analysis error:", err);
-        }
-    });
-
-    // Monitor output changes to update status indicator
-    const observer = new MutationObserver((mutations) => {
-        const text = output.textContent.toLowerCase();
-        const indicator = output.querySelector('.status-indicator');
-        
-        if (indicator) {
-            indicator.className = 'status-indicator';
-            
-            if (text.includes('error') || text.includes('failed')) {
-                indicator.classList.add('error');
-            } else if (text.includes('profile') || text.includes('analysis')) {
-                indicator.classList.add('success');
-            } else if (text.includes('analyzing') || text.includes('processing')) {
-                indicator.classList.add('processing');
-            } else {
-                indicator.classList.add('waiting');
-            }
-        }
-        
-        // Remove loading state when done
-        if (!text.includes('analyzing')) {
+        } finally {
+            // Remove loading state when done
             analyzeBtn.classList.remove('loading');
         }
     });
-
-    observer.observe(output, { childList: true, subtree: true, characterData: true });
 });
 
 function displayAnalysis(playerName, analysis) {
@@ -90,21 +62,43 @@ function displayAnalysis(playerName, analysis) {
     // Format the analysis with better styling
     const formattedAnalysis = formatAnalysisText(analysis);
     
-    output.innerHTML = `<span class="status-indicator success"></span><strong>✅ Analysis Complete for: ${playerName}</strong>\n\n${formattedAnalysis}`;
+    output.innerHTML = `${formattedAnalysis}`;
 }
-
 function formatAnalysisText(text) {
-    // Add some basic formatting to make the AI output more readable
+    // For error messages, return as-is to preserve the Python formatting
+    if (text.includes("❌ Error:") || text.includes("No games found")) {
+        return text;
+    }
+    
     let formatted = text;
     
-    // Make section headers bold and add spacing
+    // Remove the initial disclaimer note if present
+    formatted = formatted.replace(/^Okay, here's a strategic player profile for .*?, based on the provided chess data:\n\n/g, '');
+    
+    // Format main section headers with larger, colored text
     formatted = formatted.replace(/^(PLAYER PROFILE:|OPENING PREFERENCES:|MIDDLEGAME SKILLS:|RECOMMENDATIONS:)/gm, 
-        '\n<strong style="color: var(--primary); font-size: 1.1em;">$1</strong>');
+        '\n<strong style="color: var(--primary); font-size: 1.2em; display: block; margin: 1.5rem 0 0.5rem 0;">$1</strong>');
     
-    // Make subsections stand out
-    formatted = formatted.replace(/^- ([^:]+):/gm, '• <strong>$1:</strong>');
+    // Format subsection headers (like Strengths, Weaknesses, etc.)
+    formatted = formatted.replace(/^\*   \*\*([^:]+):\*\*/gm, 
+        '<strong style="color: var(--accent); display: block; margin: 0.8rem 0 0.3rem 0;">$1:</strong>');
     
-    // Add line breaks for better readability
+    // Format bullet points with better styling
+    formatted = formatted.replace(/^\*   ([^*].*)/gm, 
+        '<div style="margin: 0.3rem 0; padding-left: 1rem;">• $1</div>');
+    
+    // Format bold text within content
+    formatted = formatted.replace(/\*\*([^*]+)\*\*/g, 
+        '<strong style="color: var(--text-light);">$1</strong>');
+    
+    // Format the disclaimer at the end
+    formatted = formatted.replace(/(---\n\n\*\*Disclaimer:\*\*.*)/gs, 
+        '<div style="margin-top: 2rem; padding: 1rem; background: var(--card-bg); border-left: 4px solid var(--text-muted); font-style: italic; font-size: 0.9em;">$1</div>');
+    
+    // Clean up any remaining markdown-style formatting
+    formatted = formatted.replace(/\*{2}(.*?)\*{2}/g, '<strong>$1</strong>');
+    
+    // Add proper spacing between sections
     formatted = formatted.replace(/\n\n/g, '\n\n');
     
     return formatted;
