@@ -18,33 +18,30 @@ document.addEventListener("DOMContentLoaded", () => {
         output.innerHTML = '<span class="status-indicator processing"></span>🧠 Analyzing player data with AI...\n\nThis may take 10-30 seconds. Please wait...';
         
         try {
-            const response = await fetch("/run-strategy", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ playerName })
-            });
-
-            const data = await response.json();
+            const response = await fetch(`/run-strategy?player=${encodeURIComponent(playerName)}`);
+            const analysis = await response.text();
             
-            if (data.error) {
+            if (response.ok) {
+                // Display successful analysis
+                displayAnalysis(playerName, analysis);
+            } else {
                 // Handle errors
-                if (data.error.includes("No games found")) {
+                if (analysis.includes("No games found")) {
                     output.innerHTML = `<span class="status-indicator error"></span>❌ <strong>Player Not Found</strong>\n\nNo games found for "${playerName}" in the database.\n\n<strong>Suggestions:</strong>\n• Check the spelling\n• Try the full name or nickname\n• Player might not be in the database`;
                 } else {
-                    output.innerHTML = `<span class="status-indicator error"></span>❌ <strong>Error:</strong>\n\n${data.error}\n\n${data.stderr || ''}`;
+                    output.innerHTML = `<span class="status-indicator error"></span>❌ <strong>Error:</strong>\n\n${analysis}`;
                 }
-                return;
-            }
-            
-            if (data.success && data.analysis) {
-                // Display successful analysis
-                displayAnalysis(playerName, data.analysis);
             }
         } catch (err) {
             output.innerHTML = '<span class="status-indicator error"></span>❌ <strong>Connection Error</strong>\n\nFailed to connect to the analysis server.\n\nPlease check your connection and try again.';
             console.error("Analysis error:", err);
+        }
+    });
+
+    // Enable Enter key to submit
+    playerInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            analyzeBtn.click();
         }
     });
 });
