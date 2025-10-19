@@ -160,11 +160,3 @@ NODE_ENV=development
 - This project is for educational purposes.
 - Not intended for commercial use.
 
-
-
-
-##  License
-
-- This project is for educational purposes.
-- Not intended for commercial use.
-
