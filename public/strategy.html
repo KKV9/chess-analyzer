@@ -80,55 +80,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/strategy.js"></script>
-    <script>
-        // Enable Bootstrap tooltips
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-        const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
-
-        // Enhanced button interaction
-        const analyzeBtn = document.getElementById('analyzeBtn');
-        const output = document.getElementById('output');
-        const playerInput = document.getElementById('playerInput');
-
-        // Add loading state when button is clicked
-        analyzeBtn.addEventListener('click', function() {
-            this.classList.add('loading');
-            output.classList.add('has-content');
-        });
-
-        // Enable Enter key to submit
-        playerInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                analyzeBtn.click();
-            }
-        });
-
-        // Monitor output changes to update status indicator
-        const observer = new MutationObserver((mutations) => {
-            const text = output.textContent.toLowerCase();
-            const indicator = output.querySelector('.status-indicator');
-            
-            if (indicator) {
-                indicator.className = 'status-indicator';
-                
-                if (text.includes('error') || text.includes('failed')) {
-                    indicator.classList.add('error');
-                } else if (text.includes('profile') || text.includes('analysis')) {
-                    indicator.classList.add('success');
-                } else if (text.includes('analyzing') || text.includes('processing')) {
-                    indicator.classList.add('processing');
-                } else {
-                    indicator.classList.add('waiting');
-                }
-            }
-            
-            // Remove loading state when done
-            if (!text.includes('analyzing')) {
-                analyzeBtn.classList.remove('loading');
-            }
-        });
-
-        observer.observe(output, { childList: true, subtree: true, characterData: true });
-    </script>
 </body>
 </html>

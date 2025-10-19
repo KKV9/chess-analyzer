@@ -5,6 +5,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const output = document.getElementById("output");
     const playerInput = document.getElementById("playerInput");
 
+    // Enable Bootstrap tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+
+    // Add loading state when button is clicked
+    analyzeBtn.addEventListener('click', function() {
+        this.classList.add('loading');
+        output.classList.add('has-content');
+    });
+
+    // Enable Enter key to submit
+    playerInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            analyzeBtn.click();
+        }
+    });
+
+    // Analysis functionality
     analyzeBtn.addEventListener("click", async () => {
         const playerName = playerInput.value.trim();
         
@@ -38,12 +56,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Enable Enter key to submit
-    playerInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            analyzeBtn.click();
+    // Monitor output changes to update status indicator
+    const observer = new MutationObserver((mutations) => {
+        const text = output.textContent.toLowerCase();
+        const indicator = output.querySelector('.status-indicator');
+        
+        if (indicator) {
+            indicator.className = 'status-indicator';
+            
+            if (text.includes('error') || text.includes('failed')) {
+                indicator.classList.add('error');
+            } else if (text.includes('profile') || text.includes('analysis')) {
+                indicator.classList.add('success');
+            } else if (text.includes('analyzing') || text.includes('processing')) {
+                indicator.classList.add('processing');
+            } else {
+                indicator.classList.add('waiting');
+            }
+        }
+        
+        // Remove loading state when done
+        if (!text.includes('analyzing')) {
+            analyzeBtn.classList.remove('loading');
         }
     });
+
+    observer.observe(output, { childList: true, subtree: true, characterData: true });
 });
 
 function displayAnalysis(playerName, analysis) {
