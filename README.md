@@ -1,162 +1,267 @@
-#  Chess Analyzer App
+<div align="center">
+  <img src="public/images/logo.png" alt="Chess Analyzer Logo" width="200" height="200">
+  
+  *An intelligent web-based chess analysis platform*
+</div>
 
-An intelligent web-based application that analyzes thousands of chess games to extract insights, visualize trends, and assist players in improving their strategic understanding.
-Developed as part of the **COMP7039 – Agile Processes** module (Autumn 2025).
+An intelligent web-based application that analyzes thousands of chess games to extract insights, visualize trends, and assist players in improving their strategic understanding. Developed as part of the **COMP7039 – Agile Processes** module (Autumn 2025).
 
-##  Project Overview
+**Live Demo**: [https://chess-app.kkv9.ovh/](https://chess-app.kkv9.ovh/)  
+**Sprint Progress**: 2/3 Sprints Completed
 
-The **Chess Analyzer App** is designed to demonstrate Agile development practices while applying data science and AI to the world of chess.
-The system imports, processes, and visualizes large datasets of chess games, providing knowledge extraction through machine learning and LLM-based analysis.
+## Features
 
-##  Key Features
+### Core Functionality
 
-### **Sprint 1 – Data Input**
-- Import chess game datasets (PGN/CSV format)
-- Preprocess and clean data (handle missing or invalid values)
-- Store structured data in a relational database
+| Feature | Status | Description |
+|---------|---------|-------------|
+| **Data Validation** | Complete | Validate chess CSV datasets for integrity and format |
+| **Win Rate Analysis** | Complete | Interactive charts showing black vs white performance |
+| **AI Player Analysis** | Complete | Strategic profiles using Google's Generative AI |
+| **Animated Chess Demos** | Complete | Interactive Opera Game with move animations |
+| **Responsive Design** | Complete | Mobile-friendly interface with dark theme |
 
-### **Sprint 2 – Data Visualization**
-- Display processed chess data using tables and charts
-- Explore move frequencies, opening trends, and player performance
-- Interactive dashboard for filtering and sorting data
+### Data Visualization
+- **Interactive Charts**: Win rate distributions using Chart.js
+- **Real-time Processing**: Live data analysis from CSV files
+- **Statistical Insights**: Percentage calculations and trend analysis
+- **Mobile Optimized**: Responsive design for all devices
 
-### **Sprint 3 – Knowledge Extraction**
-- Apply machine learning or communicate with an LLM for intelligent insights
-- Identify anomalies, patterns, and strengths in player behavior
-- Generate human-readable summaries of player performance
+### AI-Powered Insights
+- **Strategic Profiles**: Player style analysis (Aggressive/Positional/Tactical)
+- **Opening Repertoire**: Preferred openings and variations
+- **Skill Assessment**: Tactical awareness and strategic planning evaluation
+- **Training Recommendations**: Personalized improvement suggestions
 
-### **Data Validation**
-- Validates large chess game datasets (`data/data.csv`)
-- Simple Python validation script (`validate.py`)
-- Runs automatically through the Express backend
+## Architecture
 
-### **Web Interface**
-- Built using **Node.js** and **Express**
-- Frontend served from the `/public` directory
-- Button to execute Python validation and display output dynamically
+```
+Frontend (HTML/CSS/JS)
+    ↓ HTTP Requests
+Express.js Server (Node.js)
+    ↓ Child Process Execution  
+Python Scripts (Data Processing)
+    ↓ File I/O & AI API Calls
+Data Files + Google Gemini AI
+    ↑ JSON/Text Responses
+Backend → Frontend → User
+```
 
-### **Technology Stack**
-| Layer | Technologies |
-|-------|---------------|
-| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js |
-| **Backend** | Node.js, Express |
-| **AI/ML** | Google Generative AI (Gemini), Python data processing |
-| **Python Scripts** | `validate.py`, `wins.py`, `strat.py` |
-| **DevOps** | GitHub Actions, PM2, Nginx |
-| **Hosting** | AWS EC2, Cloudflare DNS |
+## Technology Stack
 
-##  Knowledge Extraction Examples
+| Layer | Technologies | Purpose |
+|-------|---------------|---------|
+| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js | User interface and data visualization |
+| **Backend** | Node.js, Express.js | Web server and API routing |
+| **AI/ML** | Google Generative AI (Gemini), Python | Strategic analysis and insights |
+| **Data Processing** | Python 3.8+, CSV module, pandas | Chess game analysis and statistics |
+| **DevOps** | GitHub Actions, PM2, Nginx | Continuous deployment and process management |
+| **Hosting** | AWS EC2, Cloudflare DNS | Production deployment and DNS management |
 
-- Predict the likelihood of winning based on opening moves.
-- Detect common blunders and their frequencies.
-- Use an LLM to summarize a player’s strategic profile.
+## Project Structure
 
-##  Agile Artifacts
+```
+chess-analyzer/
+├── public/                 # Frontend assets
+│   ├── css/
+│   │   └── styles.css     # Main stylesheet and animations
+│   ├── js/                # JavaScript modules
+│   │   ├── index.js       # Chess board animations
+│   │   ├── strategy.js    # AI analysis interface
+│   │   ├── validator.js   # Data validation
+│   │   └── visualiser.js  # Chart visualizations
+│   ├── images/            # Logos and icons
+│   │   ├── logo.png       # Main application logo
+│   │   ├── favicon_black.png
+│   │   └── favicon_white.png
+│   └── *.html            # Application pages
+├── scripts/               # Python analysis scripts
+│   ├── validate.py       # CSV data validation
+│   ├── wins.py           # Win rate analysis
+│   ├── strat.py          # AI player analysis
+│   └── requirements.txt  # Python dependencies
+├── data/
+│   └── data.csv          # Chess games dataset (5000+ games)
+├── server.js             # Express server
+├── ecosystem.config.js   # PM2 production configuration
+└── package.json          # Node.js dependencies
+```
 
-- **Product Backlog:** Defined in Jira with story points and priorities.
-- **Sprints:** 3 total (Data Input, Visualization, Knowledge Extraction).
-- **Scrum Roles:** Each sprint has a different Scrum Master.
-- **Burndown Charts:** Tracked automatically through project management tools.
-- **Meetings:** Sprint Planning, Daily Standups, Reviews, and Retrospectives.
+## Agile Development
 
-##  Agile Timeline
+### Sprint Timeline & Progress
 
-| Sprint | Duration | Focus |
-|--------|-----------|--------|
-| **Sprint 1** | 22 Sep – 29 Sep | Data Import & Preprocessing |
-| **Sprint 2** | 6 Oct – 20 Oct | Visualization & Interim Report |
-| **Sprint 3** | 3 Nov – 17 Nov | Knowledge Extraction & Final Report |
+| Sprint | Duration | Focus | Scrum Master | Status | Velocity |
+|--------|-----------|--------|--------------|---------|----------|
+| **Sprint 1** | 22 Sep – 29 Sep | Data Input & Validation | Cillian Houlihan | Complete | 9/11 points |
+| **Sprint 2** | 6 Oct – 20 Oct | Visualization & UI | Daniel Sheehan | Complete | 11/11 points |
+| **Sprint 3** | 3 Nov – 17 Nov | AI Integration & Deployment | Scott Wolohan | In Progress | 18 points planned |
 
-##  Team Roles
+### Team Roles
 
-| Member | Sprint | Role |
-|---------|--------|------|
-| Cillian Houlihan | Sprint 1 | Scrum Master |
-| Daniel Sheehan | Sprint 2 | Scrum Master |
-| Scott Wolohan | Sprint 3 | Scrum Master |
-| Ciarán O'Brien | Ongoing | DevOps Lead |
+| Member | Role | Responsibilities |
+|---------|------|------------------|
+| **Cillian Houlihan** | Sprint 1 Scrum Master | Data validation, project foundation |
+| **Daniel Sheehan** | Sprint 2 Scrum Master | Visualization, UI/UX design |
+| **Scott Wolohan** | Sprint 3 Scrum Master | AI integration, strategic analysis |
+| **Ciarán O'Brien** | DevOps Lead | Deployment, infrastructure, CI/CD |
 
-##  Documentation
+### Agile Artifacts
+- **Product Backlog**: Jira-managed user stories with story points
+- **Sprint Reviews**: Bi-weekly demonstrations and feedback sessions
+- **Burndown Charts**: Progress tracking and velocity measurement
+- **Retrospectives**: Continuous process improvement
 
-- Interim Report: Submitted 20 October 2025
-
-- Final Report: Submitted 17 November 2025
-
-- Presentation: 24 November 2025
-
-##  Installation & Usage
+## Quick Start
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
 - **Python** (v3.8 or higher)
 - **npm** (v6 or higher)
+- **Google Generative AI API Key** ([Get one here](https://aistudio.google.com/))
 
-### 1. Clone the Repository
+### Installation
+
+1. **Clone the Repository**
 ```bash
 git clone https://github.com/KKV9/chess-analyzer.git
 cd chess-analyzer
 ```
 
-### 2. Setup Node.js
+2. **Setup Node.js Backend**
 ```bash
 # Install dependencies
 npm install
 
-# Create environment file
+# Configure environment
 cp .env.example .env
-
-# Edit .env with your API key
-# GENAI_KEY=your_google_genai_api_key_here
+# Edit .env with your API key and settings
 ```
 
-### 3. Install Python Virtual Environment
+3. **Setup Python Environment**
 ```bash
-# Create virtual environment
+# Create and activate virtual environment
 python3 -m venv venv
-
-# Activate virtual environment
-# On Linux/Mac:
-source venv/bin/activate
-# On Windows:
-# venv\Scripts\activate
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate  # Windows
 
 # Install Python dependencies
 pip install --upgrade pip
 pip install -r scripts/requirements.txt
 ```
 
-### 4. Run the Web Server
-```bash
-node server.js
-```
-
-### 5. Open in Browser
-```bash
-http://localhost:3000
-```
-## Configuration
-### Environment Variables
-Create a .env file in the root directory:
+4. **Configure Environment**
 ```env
-# Server Configuration
+# .env file
 PORT=3000
-
-# Google Generative AI API Key
 GENAI_KEY=your_google_genai_api_key_here
-
-# Node Environment
 NODE_ENV=development
 ```
 
-### Google API Key
-1. Visit [Google AI Studio](https://aistudio.google.com/) 
+5. **Run the Application**
+```bash
+# Development
+node server.js
 
-1. Create a new API key
+# Production (with PM2)
+pm2 start ecosystem.config.js
+```
 
-1. Add it to your .env file
+6. **Access the Application**
+```
+http://localhost:3000
+```
 
-##  License
+## Usage Guide
 
-- This project is for educational purposes.
-- Not intended for commercial use.
+### Data Validation
+1. Navigate to **Validator** page
+2. Click "Run Validation" to check CSV data integrity
+3. View validation results and data statistics
 
+### Win Rate Analysis
+1. Go to **Visualizer** page  
+2. Click "Run Analysis" to generate win rate charts
+3. Explore black vs white performance statistics
+
+### Player Strategy Analysis
+1. Access **Strategy Analysis** page
+2. Enter player name (e.g., "fiore2", "ram77", "Cultan")
+3. View AI-generated strategic profile and recommendations
+
+### Chess Demonstrations
+- **Homepage**: Watch animated Opera Game with special move effects
+- **Interactive**: Piece movements, captures, and game state indicators
+
+## API Endpoints
+
+| Endpoint | Method | Description | Response Format |
+|----------|---------|-------------|-----------------|
+| `/run-validation` | GET | Validate CSV data integrity | Plain Text |
+| `/run-black-white` | GET | Get win rate statistics | JSON |
+| `/run-strategy?player=<name>` | GET | Generate AI player analysis | Formatted Text |
+
+## Troubleshooting
+
+### Common Issues
+
+**Python Script Errors**
+```bash
+# Ensure virtual environment is activated
+source venv/bin/activate
+
+# Reinstall dependencies if needed
+pip install -r scripts/requirements.txt
+```
+
+**API Key Issues**
+- Verify `GENAI_KEY` in `.env` file
+- Check Google AI Studio quota and permissions
+- Ensure proper environment variable loading
+
+**Deployment Issues**
+```bash
+# Check PM2 status
+pm2 status chess-analyzer
+
+# View application logs
+pm2 logs chess-analyzer
+
+# Restart application
+pm2 restart chess-analyzer
+```
+
+### Data File Requirements
+- CSV file must be located at `data/data.csv`
+- Required columns: `White`, `Black`, `Result`
+- Supported result formats: `1-0` (white wins), `0-1` (black wins), `1/2-1/2` (draw)
+
+## Documentation
+
+- **[Interim Report](docs/interim-report.pdf)** - Due 02 November 2025
+- **[Final Report](docs/final-report.md)** - Due 01 December 2025
+- **[Presentation Slides](docs/presentation.pdf)** - Scheduled 24 November 2025
+
+## Project Status
+
+| Component | Status | Notes |
+|-----------|---------|-------|
+| Data Validation | Production Ready | Handles 5000+ game datasets |
+| Visualization | Production Ready | Interactive charts with Chart.js |
+| AI Analysis | Production Ready | Google Gemini integration complete |
+| Deployment | Production Ready | AWS EC2 with CI/CD pipeline |
+| Documentation | Work in progress | README, sprint reports, Interim and Final Reports, and Presentation Slides |
+
+## License
+
+This project is developed for educational purposes as part of COMP7039 – Agile Processes. Not intended for commercial use.
+All chess data used for analysis is from publicly available sources and used for educational demonstration.
+
+## Team Contact
+
+| Member | Role | Contact |
+|---------|------|---------|
+| Cillian Houlihan | Sprint 1 Lead | [GitHub](https://github.com/houlihan999) |
+| Daniel Sheehan | Sprint 2 Lead | [GitHub](https://github.com/Daniel-Sheehan-Projects) |
+| Scott Wolohan | Sprint 3 Lead | [GitHub](https://github.com/ScottW23) |
+| Ciarán O'Brien | DevOps Lead | [GitHub](https://github.com/KKV9) |
