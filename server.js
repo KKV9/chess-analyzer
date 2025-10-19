@@ -44,7 +44,7 @@ app.get("/run-black-white", (req, res) => {
         if (stderr) {
             console.error(`Script stderr: ${stderr}`);
         }
-
+        
         // Parse JSON output from Python script
         try {
             const result = JSON.parse(stdout);
@@ -56,43 +56,52 @@ app.get("/run-black-white", (req, res) => {
 });
 
 // Endpoint to run strategic player analysis
-app.post("/run-strategy", (req, res) => {
-    const { playerName } = req.body;
-
+app.get("/run-strategy", (req, res) => {
+    const playerName = req.query.player;
+    
     if (!playerName || playerName.trim() === '') {
-        return res.status(400).json({ error: "Player name is required" });
+        return res.status(400).send("Error: Player name is required");
     }
 
     const scriptPath = path.join(__dirname, "scripts/strat.py");
     const pythonCmd = path.join(__dirname, "venv/bin/python3");
-    const sanitizedName = playerName.replace(/[^a-zA-Z0-9_\-\s]/g, ''); // Sanitize input
-
+    const sanitizedName = playerName.replace(/[^a-zA-Z0-9_\-\s'.]/g, '');
+    
     // Pass GENAI_KEY as environment variable to the Python process
     const env = {
         ...process.env,
         GENAI_KEY: process.env.GENAI_KEY
     };
 
-    exec(`"${pythonCmd}" "${scriptPath}" "${sanitizedName}"`, { env, maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
+    exec(`"${pythonCmd}" "${scriptPath}" "${sanitizedName}"`, { 
+        env, 
+        maxBuffer: 1024 * 1024 * 10,
+        timeout: 60000 // 60 second timeout for AI processing
+    }, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing strategy script: ${error.message}`);
-            return res.status(500).json({
-                error: error.message,
-                stderr: stderr
-            });
+            
+            // Check if it's a timeout
+            if (error.killed) {
+                return res.status(504).send("Analysis timed out. Please try again with a different player.");
+            }
+            
+            return res.status(500).send(`Error: ${error.message}\n${stderr || ''}`);
         }
-
-        if (stderr && !stdout) {
-            console.error(`Script stderr: ${stderr}`);
-            return res.status(500).json({ error: stderr });
+        
+        // Check if stderr contains actual errors (not just warnings)
+        if (stderr && stderr.toLowerCase().includes('error:')) {
+            console.error(`Script error: ${stderr}`);
+            return res.status(500).send(stderr);
         }
-
+        
+        // Check if output indicates no games found
+        if (stdout.includes("No games found") || stdout.includes("Error:")) {
+            return res.status(404).send(stdout);
+        }
+        
         // Return the analysis as plain text
-        res.json({
-            success: true,
-            playerName: playerName,
-            analysis: stdout
-        });
+        res.send(stdout);
     });
 });
 
