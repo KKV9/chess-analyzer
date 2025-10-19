@@ -690,6 +690,56 @@ body::before {
 }
 
 /* ===================================
+   STRATEGY PAGE SPECIFIC STYLES
+   =================================== */
+
+   .player-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0f;
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    border-radius: 12px;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.player-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+    background: rgba(0, 255, 136, 0.02);
+}
+
+.player-input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+.player-input:hover {
+    border-color: rgba(0, 255, 136, 0.4);
+}
+
+/* Analysis output formatting */
+.output-pre strong {
+    color: var(--primary);
+}
+
+.output-pre em {
+    color: var(--secondary);
+    font-style: italic;
+}
+
+/* Responsive input */
+@media (max-width: 768px) {
+    .player-input {
+        font-size: 1rem;
+        padding: 0.875rem 1.25rem;
+    }
+}
+
+/* ===================================
    VALIDATOR PAGE SPECIFIC
    =================================== */
 
