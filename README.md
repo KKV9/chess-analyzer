@@ -40,9 +40,9 @@ The system imports, processes, and visualizes large datasets of chess games, pro
 |-------|---------------|
 | **Frontend** | HTML / CSS with Bootstrap and Javascript |
 | **Backend** | Node.js / Express |
-| **Python Integration** | `validate.py` (CSV validator) |
+| **Python Integration** | `validate.py` (CSV validator), `wins.py` (winrate calculator), `strat.py` (Strategic analysis) |
 | **DevOps** | GitHub CI/Actions Workflows (for deployment) |
-| **Hosting** | AWS EC2 with Nginx reverse proxy and Cloudflare for DNS and CDN |
+| **Hosting** | AWS EC2 with Nginx reverse proxy and Cloudflare for DNS |
 
 ##  Knowledge Extraction Examples
 
