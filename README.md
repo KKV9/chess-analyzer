@@ -137,6 +137,13 @@ chess-analyzer/
 - **Burndown Charts**: Progress tracking and velocity measurement
 - **Retrospectives**: Continuous process improvement
 
+## Development Workflow
+We followed the **Scrum** framework with three defined sprints.  
+- Each sprint began with a **planning session** where user stories were prioritised from the product backlog.  
+- Tasks were managed using **Jira**, following the **To Do → Doing → Done** board structure.  
+- The team communicated through **Discord** and held regular **stand-ups** during lab sessions.  
+- After each sprint, we held **retrospectives** to review progress and identify improvements for the next sprint. 
+
 ## Quick Start
 
 ### Prerequisites
