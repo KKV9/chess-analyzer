@@ -38,8 +38,8 @@ An intelligent web-based application that analyzes thousands of chess games to e
 ## 📋 Table of Contents
 - [Project Overview](#-project-overview)
 - [Features](#-features)
-- [Architecture](#-architecture)
-- [Technology Stack](#-technology-stack)
+- [Architecture](#%EF%B8%8F-architecture)
+- [Technology Stack](#%EF%B8%8F-technology-stack)
 - [Agile Development](#-agile-development)
 - [Installation](#-installation)
 - [Usage Guide](#-usage-guide)
