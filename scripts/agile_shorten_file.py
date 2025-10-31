@@ -1,13 +1,13 @@
-# Author: Cillian Houlihan R00242683
+
 # This script takes a large chess CSV file and creates
-# a smaller file with 5000 random rows
+# a smaller file with 1000 random rows
 
 import csv # needed so it can handle the data csv file
 import random
 
 input_file = "chess_games.csv"          # original big file
 output_file = "chess_games_sample.csv"  # new smaller file
-new_size = 5000
+new_size = 1000
 
 # open and read all rows
 with open(input_file, "r") as new_file:
@@ -25,3 +25,4 @@ with open(output_file, "w", newline="") as outfile:
     writer.writerows(sample_rows)
 
 print("done")
+
