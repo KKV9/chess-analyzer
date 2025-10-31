@@ -24,7 +24,40 @@
             <!-- Page Header -->
             <div class="page-header">
                 <h1>CSV Database Validator</h1>
-                <p>Validate the integrity of your chess game database</p>
+                <p>Upload and validate your chess game database</p>
+            </div>
+
+            <!-- Upload Card -->
+            <div class="validator-card">
+                <div class="card-title-wrapper">
+                    <h2>Upload CSV File</h2>
+                    <i class="bi bi-info-circle info-icon" 
+                       data-bs-toggle="tooltip" 
+                       data-bs-placement="right" 
+                       title="Upload a CSV file containing chess game data. The file must include 'Black' and 'White' columns. Maximum file size: 2MB."></i>
+                </div>
+                
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                    Select a CSV file to upload (max 2MB). Required columns: <code>Black</code>, <code>White</code>
+                </p>
+
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="upload-area">
+                        <input type="file" id="csvFile" name="csvFile" accept=".csv" required style="display: none;">
+                        <label for="csvFile" class="file-label">
+                            <i class="bi bi-cloud-upload" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <span id="fileName">Click to select CSV file</span>
+                            <span style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">or drag and drop</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="uploadBtn" class="run-btn" disabled>
+                        <i class="bi bi-upload" style="margin-right: 0.5rem;"></i>
+                        Upload File
+                    </button>
+                </form>
+
+                <div id="uploadStatus" class="upload-status"></div>
             </div>
 
             <!-- Validator Card -->
@@ -34,11 +67,11 @@
                     <i class="bi bi-info-circle info-icon" 
                        data-bs-toggle="tooltip" 
                        data-bs-placement="right" 
-                       title="This validator checks the data/data.csv file on the server containing thousands of chess games. Click 'Run Validation' to verify data integrity."></i>
+                       title="This validator checks the data/data.csv file on the server. Click 'Run Validation' to verify data integrity and column presence."></i>
                 </div>
                 
                 <p style="color: var(--text-muted); margin-bottom: 2rem;">
-                    Click the button below to validate your <code>data/data.csv</code> file:
+                    Click the button below to validate the uploaded CSV file:
                 </p>
 
                 <button id="runBtn" class="run-btn">
@@ -54,7 +87,7 @@
                     <i class="bi bi-info-circle info-icon" 
                        data-bs-toggle="tooltip" 
                        data-bs-placement="right" 
-                       title="This output shows the results of the CSV validation script. The script checks if your CSV file exists, reads the header and first data row, and reports any issues."></i>
+                       title="This output shows the results of the CSV validation script. The script checks if your CSV file exists, reads the header, verifies required columns, and reports any issues."></i>
                 </div>
                 
                 <pre id="output" class="output-pre"><span class="status-indicator waiting"></span>Awaiting validation...</pre>
@@ -69,7 +102,7 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
 
-        // Enhanced button interaction
+        // Enhanced button interaction for validation
         const runBtn = document.getElementById('runBtn');
         const output = document.getElementById('output');
 
@@ -92,9 +125,9 @@
             if (indicator) {
                 indicator.className = 'status-indicator';
                 
-                if (text.includes('error') || text.includes('failed')) {
+                if (text.includes('error') || text.includes('failed') || text.includes('missing')) {
                     indicator.classList.add('error');
-                } else if (text.includes('success') || text.includes('valid')) {
+                } else if (text.includes('success') || text.includes('🎉')) {
                     indicator.classList.add('success');
                 } else if (text.includes('processing') || text.includes('running')) {
                     indicator.classList.add('processing');

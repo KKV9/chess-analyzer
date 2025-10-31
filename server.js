@@ -4,15 +4,62 @@ require('dotenv').config(); // Load environment variables from .env file
 const express = require("express");
 const { exec } = require("child_process");
 const path = require("path");
+const multer = require("multer");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadDir = path.join(__dirname, "data");
+        // Create data directory if it doesn't exist
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        // Save as data.csv, replacing any existing file
+        cb(null, "data.csv");
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 2 * 1024 * 1024 // 2MB limit
+    },
+    fileFilter: (req, file, cb) => {
+        // Only accept CSV files
+        if (file.mimetype === 'text/csv' || file.originalname.endsWith('.csv')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only CSV files are allowed'));
+        }
+    }
+});
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Serve static files from 'public' folder
 app.use(express.static("public"));
+
+// Endpoint to upload CSV file
+app.post("/upload-csv", upload.single('csvFile'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+    }
+    
+    res.json({ 
+        success: true, 
+        message: "File uploaded successfully",
+        filename: req.file.filename,
+        size: req.file.size
+    });
+});
 
 // Endpoint to run Python validation
 app.get("/run-validation", (req, res) => {
@@ -103,6 +150,19 @@ app.get("/run-strategy", (req, res) => {
         // Return the analysis as plain text
         res.send(stdout);
     });
+});
+
+// Error handling for multer
+app.use((error, req, res, next) => {
+    if (error instanceof multer.MulterError) {
+        if (error.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({ error: 'File size exceeds 2MB limit' });
+        }
+        return res.status(400).json({ error: error.message });
+    } else if (error) {
+        return res.status(400).json({ error: error.message });
+    }
+    next();
 });
 
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
