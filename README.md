@@ -36,15 +36,15 @@ An intelligent web-based application that analyzes thousands of chess games to e
 **Repository**: [https://github.com/KKV9/chess-analyzer](https://github.com/KKV9/chess-analyzer)
 
 ## 📋 Table of Contents
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Agile Development](#agile-development)
-- [Installation](#installation)
-- [Usage Guide](#usage-guide)
-- [API Documentation](#api-documentation)
-- [Team](#team)
+- [Project Overview](#-project-overview)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Technology Stack](#-technology-stack)
+- [Agile Development](#-agile-development)
+- [Installation](#-installation)
+- [Usage Guide](#-usage-guide)
+- [API Documentation](#-api-documentation)
+- [Team](#-team)
 
 ## 🎯 Project Overview
 
