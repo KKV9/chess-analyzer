@@ -32,7 +32,7 @@
 An intelligent web-based application that analyzes thousands of chess games to extract insights, visualize trends, and assist players in improving their strategic understanding. Developed as part of the **COMP7039 – Agile Processes** module (Autumn 2025).
 
 **Live Demo**: [https://chess-app.kkv9.ovh/](https://chess-app.kkv9.ovh/)  
-**Sprint Progress**: 2/3 Sprints Completed  
+**Sprint Progress**: 3/3 Sprints Completed  
 **Repository**: [https://github.com/KKV9/chess-analyzer](https://github.com/KKV9/chess-analyzer)
 
 ## 📋 Table of Contents
