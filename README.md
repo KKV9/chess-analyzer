@@ -524,8 +524,8 @@ pm2 restart chess-analyzer
 ## 📚 Documentation
 
 - **[Interim Report](docs/interim-report.pdf)** - Submitted 02 November 2025
-- **Final Report** - Due 01 December 2025
-- **Presentation Slides** - Scheduled 24 November 2025
+- **[Final Report](docs/final-report.pdf)** - Submitted 03 December 2025
+- **Presentation Slides** - Scheduled 08 December 2025
 
 ## 🎓 Academic Context
 
