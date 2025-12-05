@@ -101,9 +101,9 @@ This project demonstrates Agile development practices using the **Scrum framewor
 
 ### Sprint 3: Knowledge Extraction (03/11/2025 - 17/11/2025)
 **Scrum Master**: Scott Wolohan  
-**Status**: In Progress
+**Velocity**: 42/42 story points
 
-- ✅ Google Generative AI (Gemini) integration
+- ✅ Google Generative AI integration
 - ✅ Strategic player profile analysis
 - ✅ Opening preference identification
 - ✅ Personalized training recommendations
@@ -143,7 +143,7 @@ This project demonstrates Agile development practices using the **Scrum framewor
                                      ▼
                           ┌──────────────────────┐
                           │ Google Generative AI │
-                          │    (Gemini API)      │
+                          │    (Gemma Model)      │
                           └──────────────────────┘
 ```
 
@@ -208,7 +208,7 @@ chess-analyzer/
 |--------|-----------|--------|--------------|----------|---------|
 | **Sprint 1** | 22 Sep – 29 Sep (7 days) | Data Input & Validation | Cillian Houlihan | 25/25 points | ✅ Complete |
 | **Sprint 2** | 6 Oct – 20 Oct (14 days) | Visualization & DevOps | Daniel Sheehan | 36/36 points | ✅ Complete |
-| **Sprint 3** | 3 Nov – 17 Nov (14 days) | AI Integration & Docs | Scott Wolohan | 18+ points | 🔄 In Progress |
+| **Sprint 3** | 3 Nov – 01 Dec (28 days) | AI Integration & Docs | Scott Wolohan | 42/42 points | ✅ Complete |
 
 ### Team Roles
 
@@ -227,7 +227,7 @@ chess-analyzer/
 - **Metrics**: Story points, velocity tracking, burndown charts
 
 ### Key Achievements
-- 📈 Perfect velocity in Sprint 2 (36/36 points, 100% completion)
+- 📈 Perfect velocity in all Sprints (100% completion)
 - 🚀 Automated CI/CD deployment (Oct 7, 2025 - commit 87699f5)
 - 🎨 Professional UI with animations and responsive design
 - 🤖 AI-powered player analysis operational
@@ -524,7 +524,7 @@ pm2 restart chess-analyzer
 ## 📚 Documentation
 
 - **[Interim Report](docs/interim-report.pdf)** - Submitted 02 November 2025
-- **[Final Report](docs/final-report.pdf)** - Submitted 03 December 2025
+- **[Final Report](docs/final-report.pdf)** - Submitted 02 December 2025
 - **Presentation Slides** - Scheduled 08 December 2025
 
 ## 🎓 Academic Context
@@ -549,7 +549,7 @@ This project demonstrates:
 | Data Upload | ✅ Production | Multer integration, 2MB limit |
 | Data Validation | ✅ Production | Handles 5000+ game datasets |
 | Visualization | ✅ Production | Interactive Chart.js graphs |
-| AI Analysis | ✅ Production | Google Gemini integration |
+| AI Analysis | ✅ Production | Google Gen AI integration |
 | Deployment | ✅ Production | AWS EC2 with CI/CD |
 | Documentation | ✅ Done | Interim report complete, final report complete |
 
